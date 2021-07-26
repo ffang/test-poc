@@ -25,21 +25,8 @@
 
    <!--jaxrs:client-->
    <bean id="client" class="ch.medidata.demo.client.RestClient">
-      <argument ref="restProxy" />
    </bean>
 
-   <jaxrs-client:client id="restProxy" serviceClass="ch.medidata.demo.api.RestServiceApi"
-                        bus="clientBus" threadSafe="true"
-                        address="http://localhost:8181/cxf/server/">
-      <jaxrs-client:providers>
-         <bean class="com.fasterxml.jackson.jaxrs.json.JacksonJaxbJsonProvider" />
-         <bean class="ch.medidata.demo.client.CacheControlFeatureWrapper" />
-         <!-- CacheControlFeatureWrapper.configure never get called and CacheControlFeature can not be activated.-->
-      </jaxrs-client:providers>
-      <jaxrs-client:headers>
-         <entry key="Accept" value="application/json" />
-      </jaxrs-client:headers>
-   </jaxrs-client:client>
 
    <!--demo trigger service-->
    <jaxrs:server id="jaxrs_client" address="/client" bus="serverBus">
