@@ -3,7 +3,7 @@ mvn clean install
 
 #install in karaf
 install --start mvn:org.apache.servicemix.bundles/org.apache.servicemix.bundles.javax-cache-api/1.0.0_1
-install --start mvn:net.sf.ehcache/ehcache/2.10.1
+install --start mvn:org.ehcache/ehcache/3.2.3
 install --start mvn:ch.medidata.demo/cxf-clientcache/1.0.0-SNAPSHOT
 
 If error occurs: Caused by: java.lang.ClassNotFoundException: javax.cache.configuration.Configuration not found by org.apache.cxf.cxf-rt-rs-client [140]

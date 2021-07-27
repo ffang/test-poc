@@ -12,6 +12,6 @@ public class RestClient implements DemoRestApi {
    }
 
    public String get() {
-      return proxy.get();
+      return proxy.get().readEntity(String.class);
    }
 }

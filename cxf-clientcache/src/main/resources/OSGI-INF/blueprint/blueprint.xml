@@ -23,6 +23,20 @@
       </jaxrs:extensionMappings>
    </jaxrs:server>
 
+   <bean id="cacheProvidersFactory" class="ch.medidata.demo.client.CacheProvidersFactory">
+       <argument value="true"/>
+   </bean>
+   
+   <bean id="cacheControlClientReaderInterceptor"
+     factory-ref="cacheProvidersFactory"
+     factory-method="createCacheControlClientReaderInterceptor">
+   </bean>
+
+   <bean id="cacheControlClientRequestFilter"
+     factory-ref="cacheProvidersFactory"
+     factory-method="createCacheControlClientRequestFilter">
+   </bean>
+
    <!--jaxrs:client-->
    <bean id="client" class="ch.medidata.demo.client.RestClient">
       <argument ref="restProxy" />
@@ -33,8 +47,8 @@
                         address="http://localhost:8181/cxf/server/">
       <jaxrs-client:providers>
          <bean class="com.fasterxml.jackson.jaxrs.json.JacksonJaxbJsonProvider" />
-         <bean class="ch.medidata.demo.client.CacheControlFeatureWrapper" />
-         <!-- CacheControlFeatureWrapper.configure never get called and CacheControlFeature can not be activated.-->
+         <ref component-id="cacheControlClientRequestFilter" />
+         <ref component-id="cacheControlClientReaderInterceptor" />
       </jaxrs-client:providers>
       <jaxrs-client:headers>
          <entry key="Accept" value="application/json" />

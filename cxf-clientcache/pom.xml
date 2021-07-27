@@ -67,6 +67,12 @@
                <obrRepository>NONE</obrRepository>
                <instructions>
                   <Bundle-SymbolicName>${project.artifactId}</Bundle-SymbolicName>
+                  <Import-Package>
+                      org.ehcache.jsr107,
+                      org.apache.cxf.jaxrs.client,
+                      javax.cache,
+                      *
+                  </Import-Package>
                </instructions>
             </configuration>
             <extensions>true</extensions>

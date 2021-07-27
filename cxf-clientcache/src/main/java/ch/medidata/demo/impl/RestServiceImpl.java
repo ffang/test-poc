@@ -3,8 +3,11 @@ package ch.medidata.demo.impl;
 import ch.medidata.demo.api.RestServiceApi;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.ws.rs.core.CacheControl;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.EntityTag;
+import javax.ws.rs.core.Response;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -24,7 +27,7 @@ public class RestServiceImpl implements RestServiceApi {
       this.request = request;
    }
 
-   public String get() {
+   public Response get() {
        
        System.out.println("get called");
       //todo real entity
@@ -39,6 +42,6 @@ public class RestServiceImpl implements RestServiceApi {
 
       response.addHeader("ETag", etag.getValue());
 
-      return entity;
+      return Response.status(200).entity(entity).tag(etag).cacheControl(CacheControl.valueOf("max-age=10")).build();
    }
 }
